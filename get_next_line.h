@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 20
+#  define BUFFER_SIZE (42)
 # endif
 
 # include <stdlib.h>
@@ -26,6 +26,6 @@ size_t	ft_strlen(const char *s);
 char    *ft_strdup(const char *s1);
 char    *ft_strjoin(char const *s1, char const *s2);
 char    *ft_strchr(const char *s, int c);
-void			ft_strcpy(char *dst, const char *src);
+size_t			ft_strcpy(char *dst, char *src, size_t dst_size);
 
 #endif

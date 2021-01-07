@@ -29,7 +29,8 @@ char	*check_remainder(char *remainder, char **line)
 		{
 			*p_n = '\0';
 			*line = ft_strdup(remainder);
-			ft_strcpy(remainder, ++p_n);
+			++p_n;
+			ft_strcpy(remainder, p_n,ft_strlen(p_n) + 1);
 		}
 		else
 		{
@@ -38,7 +39,7 @@ char	*check_remainder(char *remainder, char **line)
 		}
 	}
 	else
-		*line = malloc(1);
+		*line = calloc(1, sizeof(char));
 	return (p_n);
 }
 
@@ -50,12 +51,13 @@ int		get_next_line(int fd, char **line)
 	static char	*remainder;
 	char		*tmp;
 
+	byte_read = 1;
 	if (!fd || !line || (BUFFER_SIZE <= 0))
 		return (-1);
 	p_n = check_remainder(remainder, line);
-	while (!p_n && (byte_read = read(fd, buf, BUFFER_SIZE)))
+	while (!p_n && byte_read)
 	{
-		if (byte_read < 0)
+		if ((byte_read = read(fd, buf, BUFFER_SIZE)) < 0)
 			return (-1);
 		buf[byte_read] = '\0';
 		if ((p_n = ft_strchr(buf, '\n')))
@@ -69,4 +71,5 @@ int		get_next_line(int fd, char **line)
 		ft_free(&tmp);
 	}
 	return ((byte_read || ft_strlen(remainder)) ? 1 : 0);
+
 }

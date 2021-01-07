@@ -82,14 +82,23 @@ char		*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-void		ft_strcpy(char *dst, const char *src)
+size_t		ft_strcpy(char *dst, char *src, size_t dstsize)
 {
 	size_t i;
 
-	i = 0;
-	while (src[i++])
+
+	if (!dst || !src)
+		return (0);
+	i = ft_strlen(src);
+	if (!dstsize)
+		{
+			*dst = '\0';
+			return (i);
+		}
+	while (dstsize-- > 1 && *src)
 	{
 		*(dst++) = *(src++);
 	}
 	*dst = '\0';
+	return (i);
 }
