@@ -12,34 +12,28 @@
 
 #include "get_next_line.h"
 
-void	ft_free(char **str)
-{
-	if (*str)
-		free(*str);
-}
-
-char	*check_remainder(char *remainder, char **line)
+char	*check_remainder(char **remainder, char **line)
 {
 	char *p_n;
 
 	p_n = NULL;
-	if (remainder)
+	if (*remainder)
 	{
-		if ((p_n = ft_strchr(remainder, '\n')))
+		if ((p_n = ft_strchr(*remainder, '\n')))
 		{
 			*p_n = '\0';
-			*line = ft_strdup(remainder);
+			*line = *remainder;
 			++p_n;
-			ft_strcpy(remainder, p_n,ft_strlen(p_n) + 1);
+			*remainder =  ft_strdup(p_n);
 		}
 		else
 		{
-			*line = ft_strdup(remainder);
-			*remainder = '\0';
+			*line = *remainder;
+			*remainder = NULL;
 		}
 	}
 	else
-		*line = calloc(1, sizeof(char));
+		*line = ft_strdup("");
 	return (p_n);
 }
 
@@ -49,12 +43,10 @@ int		get_next_line(int fd, char **line)
 	int			byte_read;
 	char		*p_n;
 	static char	*remainder;
-//	char		*tmp;
 
-	byte_read = 1;
 	if ((fd < 0 || !line || (BUFFER_SIZE <= 0) || (read(fd, buf, 0) == -1)))
 		return (-1);
-	p_n = check_remainder(remainder, line);
+	p_n = check_remainder(&remainder, line);
 	while (!p_n && (byte_read = read(fd, buf, BUFFER_SIZE)))
 	{
 		buf[byte_read] = '\0';
@@ -64,11 +56,8 @@ int		get_next_line(int fd, char **line)
 			if(!(remainder = ft_strdup(++p_n)))
 				return (-1);
 		}
-		//tmp = *line;
 		if(!(*line = ft_strjoin(*line, buf)))
 			return(-1);
-		//ft_free(&tmp);
 	}
 	return ((byte_read || p_n) ? 1 : 0);
-
 }
