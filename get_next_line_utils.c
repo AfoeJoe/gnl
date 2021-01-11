@@ -50,6 +50,7 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	char	*beg;
 	size_t	len1;
 	size_t	len2;
+	char	*p_s1;
 
 	if (!s1 || !s2)
 		return (NULL);
@@ -57,9 +58,11 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	len2 = ft_strlen(s2);
 	if ((new_str = malloc(sizeof(char) * (len1 + len2) + 1)) == NULL)
 		return (NULL);
-	beg = new_str;
+	beg = new_str;	
+	p_s1 = (char *)s1;
 	while (*s1)
 		*new_str++ = *s1++;
+	free(p_s1);
 	while (*s2)
 		*new_str++ = *s2++;
 	*new_str = '\0';
