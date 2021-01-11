@@ -49,27 +49,26 @@ int		get_next_line(int fd, char **line)
 	int			byte_read;
 	char		*p_n;
 	static char	*remainder;
-	char		*tmp;
+//	char		*tmp;
 
 	byte_read = 1;
-	if (!fd || !line || (BUFFER_SIZE <= 0))
+	if ((fd < 0 || !line || (BUFFER_SIZE <= 0) || (read(fd, buf, 0) == -1)))
 		return (-1);
 	p_n = check_remainder(remainder, line);
-	while (!p_n && byte_read)
+	while (!p_n && (byte_read = read(fd, buf, BUFFER_SIZE)))
 	{
-		if ((byte_read = read(fd, buf, BUFFER_SIZE)) < 0)
-			return (-1);
 		buf[byte_read] = '\0';
 		if ((p_n = ft_strchr(buf, '\n')))
 		{
 			*p_n = '\0';
-			p_n++;
-			remainder = ft_strdup(p_n);
+			if(!(remainder = ft_strdup(++p_n)))
+				return (-1);
 		}
-		tmp = *line;
-		*line = ft_strjoin(*line, buf);
-		ft_free(&tmp);
+		//tmp = *line;
+		if(!(*line = ft_strjoin(*line, buf)))
+			return(-1);
+		//ft_free(&tmp);
 	}
-	return ((byte_read || ft_strlen(remainder)) ? 1 : 0);
+	return ((byte_read || p_n) ? 1 : 0);
 
 }
