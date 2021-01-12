@@ -6,7 +6,7 @@
 /*   By: tkathy <tkathy@student.21-school.>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 19:43:21 by tkathy            #+#    #+#             */
-/*   Updated: 2021/01/04 21:41:40 by tkathy           ###   ########.fr       */
+/*   Updated: 2021/01/12 15:19:51 by tkathy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*check_remainder(char **remainder, char **line)
 			*p_n = '\0';
 			*line = *remainder;
 			++p_n;
-			*remainder =  ft_strdup(p_n);
+			*remainder = ft_strdup(p_n);
 		}
 		else
 		{
@@ -53,11 +53,11 @@ int		get_next_line(int fd, char **line)
 		if ((p_n = ft_strchr(buf, '\n')))
 		{
 			*p_n = '\0';
-			if(!(remainder = ft_strdup(++p_n)))
+			if (!(remainder = ft_strdup(++p_n)))
 				return (-1);
 		}
-		if(!(*line = ft_strjoin(*line, buf)))
-			return(-1);
+		if (!(*line = ft_strjoin(*line, buf)))
+			return (-1);
 	}
 	return ((byte_read || p_n) ? 1 : 0);
 }

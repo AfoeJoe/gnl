@@ -6,7 +6,7 @@
 /*   By: tkathy <tkathy@student.21-school.>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 19:45:23 by tkathy            #+#    #+#             */
-/*   Updated: 2021/01/04 21:21:34 by tkathy           ###   ########.fr       */
+/*   Updated: 2021/01/12 15:19:17 by tkathy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	len2 = ft_strlen(s2);
 	if ((new_str = malloc(sizeof(char) * (len1 + len2) + 1)) == NULL)
 		return (NULL);
-	beg = new_str;	
+	beg = new_str;
 	p_s1 = (char *)s1;
 	while (*s1)
 		*new_str++ = *s1++;
@@ -83,25 +83,4 @@ char		*ft_strchr(const char *s, int c)
 	if (c == '\0')
 		return (ps);
 	return (0);
-}
-
-size_t		ft_strcpy(char *dst, char *src, size_t dstsize)
-{
-	size_t i;
-
-
-	if (!dst || !src)
-		return (0);
-	i = ft_strlen(src);
-	if (!dstsize)
-		{
-			*dst = '\0';
-			return (i);
-		}
-	while (dstsize-- > 1 && *src)
-	{
-		*(dst++) = *(src++);
-	}
-	*dst = '\0';
-	return (i);
 }

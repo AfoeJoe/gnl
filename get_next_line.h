@@ -6,7 +6,7 @@
 /*   By: tkathy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 20:36:30 by tkathy            #+#    #+#             */
-/*   Updated: 2021/01/04 21:15:48 by tkathy           ###   ########.fr       */
+/*   Updated: 2021/01/12 15:21:13 by tkathy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-int	get_next_line(int fd, char **line);
+int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *s);
-char    *ft_strdup(const char *s1);
-char    *ft_strjoin(char const *s1, char const *s2);
-char    *ft_strchr(const char *s, int c);
-size_t			ft_strcpy(char *dst, char *src, size_t dst_size);
+char	*ft_strdup(const char *s1);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
 
 #endif
